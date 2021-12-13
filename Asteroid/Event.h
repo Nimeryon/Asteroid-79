@@ -63,7 +63,7 @@ class EventListenerMemberFunction : public EventListener<T>
 public:
 	EventListenerMemberFunction(void(U::*fn)(T& value), U* instance) : m_instance(instance), m_function(fn) {}
 
-	void invoke(T& value) override { (m_instance->*m_function)(value); }
+	void invoke(T& value) override { if (m_instance) (m_instance->*m_function)(value); }
 	bool isSameBindFunction(EventListenerBase<T>* el) override
 	{
 		if (!EventListenerBase<T>::isSameType(el)) return false;
@@ -122,7 +122,7 @@ class EventListenerMemberFunction<void, U> : public EventListener<void>
 public:
 	EventListenerMemberFunction(void(U::*fn)(), U* instance) : m_instance(instance), m_function(fn) {}
 
-	void invoke() override { (m_instance->*m_function)(); }
+	void invoke() override { if (m_instance) (m_instance->*m_function)(); }
 	bool isSameBindFunction(EventListenerBase<void>* el) override
 	{
 		if (!isSameType(el)) return false;
@@ -234,7 +234,7 @@ public:
 	void operator()(T& value)
 	{
 		for (const auto listener : this->m_listeners)
-			listener->invoke(value);
+			if (listener != nullptr) listener->invoke(value);
 	}
 };
 
@@ -248,6 +248,6 @@ public:
 	void operator()()
 	{
 		for (const auto listener : m_listeners)
-			listener->invoke();
+			if (listener != nullptr) listener->invoke();
 	}
 };

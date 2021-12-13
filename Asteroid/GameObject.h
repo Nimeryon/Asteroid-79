@@ -15,6 +15,7 @@ public:
 	virtual void start() = 0;
 	virtual void update() = 0;
 	virtual void draw(sf::RenderWindow& window) = 0;
+	virtual void destroy() = 0;
 
 	// Setters
 	virtual void setVelocity(const Vector2& velocity);

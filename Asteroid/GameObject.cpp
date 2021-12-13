@@ -6,6 +6,9 @@ extern int SCREEN_HEIGHT;
 
 GameObject::GameObject(sf::Shape* shape, const float& size, const Vector2& velocity, const float& speed) : m_shape(shape), m_size(size), m_velocity(velocity), m_speed(speed)
 {
+	// Add GameObject to object array
+	GameHandler::addObject(this);
+
 	setScale(Vector2(m_size));
 
 	GameHandler::onStart += EventHandler::bind(&GameObject::start, this);

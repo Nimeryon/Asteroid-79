@@ -6,7 +6,6 @@
 
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
-extern bool DEBUG_MODE;
 
 std::vector<std::vector<Vector2>> asteroidShapes = 
 {
@@ -68,7 +67,7 @@ m_rotationSpeed(Random::randomf(10.f, 60.f))
 
     // Set points of Asteroid
     auto shape = dynamic_cast<sf::ConvexShape*>(m_shape);
-    const int shapeForm = Random::random(0, 4);
+    const int shapeForm = Random::random(0, asteroidShapes.size());
     shape->setPointCount(asteroidShapes[shapeForm].size());
     for (int i = 0; i < asteroidShapes[shapeForm].size(); ++i)
 		shape->setPoint(i, asteroidShapes[shapeForm][i]);
@@ -103,6 +102,10 @@ void Asteroid::update()
 }
 void Asteroid::draw(sf::RenderWindow& window)
 {
-    CollidableObject::draw(window);
     window.draw(*m_shape);
+    CollidableObject::draw(window);
+}
+void Asteroid::destroy()
+{
+    delete this;
 }

@@ -6,7 +6,7 @@
 #include "TickSystem.h"
 #include "Time.h"
 #include "Asteroid.h"
-#include "Random.h"
+#include "Ship.h"
 
 int SCREEN_WIDTH = 1080;
 int SCREEN_HEIGHT = 720;
@@ -54,8 +54,6 @@ bool DEBUG_MODE = false;
 
 int main()
 {
-    sf::Clock clock;
-
     // Set seed of random
     std::srand(std::time(nullptr));
 
@@ -66,7 +64,8 @@ int main()
     TickSystem tickSystem;
 
     // GameObject test
-    for (int i = 0; i < 50; ++i)
+    new Ship();
+    for (int i = 0; i < 20; ++i)
         new Asteroid();
 
     // Call start event
@@ -74,6 +73,7 @@ int main()
 
     // Start loop
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Asteroid");
+    sf::Clock clock;
     while (window.isOpen())
     {
         sf::Event event;
@@ -89,6 +89,7 @@ int main()
         time.setTime(clock.restart());
         gameHandler.update(window);
 
+        // Set debug mode
         if (InputSystem::getKeyDown(sf::Keyboard::F3)) DEBUG_MODE = !DEBUG_MODE;
 
         window.display();
