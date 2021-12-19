@@ -1,9 +1,12 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include <vector>
 
-#include "Event.h"
-#include "GameObject.h"
+namespace sf { class RenderWindow; }
+template<typename T>
+class Event;
+class GameObject;
+class CollidableObject;
+enum CollisionTag;
 
 class GameHandler
 {
@@ -11,11 +14,13 @@ public:
 	GameHandler();
 	~GameHandler();
 
+	void start();
 	void update(sf::RenderWindow& window);
 
 	// GameObject Handling
 	static void addObject(GameObject* object);
 	static void destroyObject(GameObject* object);
+	static std::vector<CollidableObject*> getObjectsOfTag(const CollisionTag& tag);
 
 	// Events
 	static Event<void> onStart;

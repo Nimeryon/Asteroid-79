@@ -31,9 +31,6 @@
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{d21536f9-16ec-49ed-a7e7-2511fcd02f0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Game\Asteroids">
-      <UniqueIdentifier>{13af38dc-7c9b-4ff0-8207-0bff3e717a94}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Engine\Objects">
       <UniqueIdentifier>{07fa8fa1-1fb8-4043-81b1-c3170e64c499}</UniqueIdentifier>
     </Filter>
@@ -46,8 +43,14 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{2af15e23-76bf-4ab2-9ecb-3d0fc4f852f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game\Asteroids">
-      <UniqueIdentifier>{aaad2216-bc55-4ad2-8215-4d467174a64f}</UniqueIdentifier>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{8736f878-5d0c-4ff8-bdf6-552a0f7b39df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Objects">
+      <UniqueIdentifier>{da33879a-4de8-40b9-88b7-f2a928e2833e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Objects">
+      <UniqueIdentifier>{cbbbf3f5-aac7-4737-8d17-b895531370d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,14 +81,20 @@
     <ClCompile Include="Random.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Asteroid.cpp">
-      <Filter>Source Files\Game\Asteroids</Filter>
-    </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Game\Objects</Filter>
+    </ClCompile>
     <ClCompile Include="Ship.cpp">
+      <Filter>Source Files\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Source Files\Game\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,12 +116,6 @@
     <ClInclude Include="Event.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Ship.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="AsteroidHandler.h">
-      <Filter>Header Files\Game\Asteroids</Filter>
-    </ClInclude>
     <ClInclude Include="CollidableObject.h">
       <Filter>Header Files\Engine\Objects</Filter>
     </ClInclude>
@@ -125,17 +128,31 @@
     <ClInclude Include="Random.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Asteroid.h">
-      <Filter>Header Files\Game\Asteroids</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionTag.h">
+      <Filter>Header Files\Engine\Objects</Filter>
+    </ClInclude>
     <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Fonts\Minecraft.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

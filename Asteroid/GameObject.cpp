@@ -1,3 +1,5 @@
+#include "Vector2.h"
+#include "Event.h"
 #include "GameObject.h"
 #include "GameHandler.h"
 
@@ -19,12 +21,13 @@ GameObject::GameObject(sf::Shape* shape, const float& size, const float& speed) 
 GameObject::GameObject(sf::Shape* shape, const float& size, const Vector2& velocity) : GameObject(shape, size, velocity, 0.f) {}
 GameObject::GameObject(sf::Shape* shape, const float& size) : GameObject(shape, size, 0.f) {}
 GameObject::GameObject(sf::Shape* shape) : GameObject(shape, 1.f) {}
-
 GameObject::~GameObject()
 {
 	GameHandler::onStart -= EventHandler::bind(&GameObject::start, this);
 	GameHandler::onUpdate -= EventHandler::bind(&GameObject::update, this);
 	GameHandler::onDraw -= EventHandler::bind<sf::RenderWindow&, GameObject>(&GameObject::draw, this);
+
+	// delete m_shape;
 }
 
 // Setters

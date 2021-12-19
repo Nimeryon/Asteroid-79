@@ -1,8 +1,12 @@
-#include "Asteroid.h"
+#include <SFML/Graphics.hpp>
+
+#include "CollisionTag.h"
+#include "GameHandler.h"
 #include "Random.h"
 #include "Time.h"
 #include "vector"
 #include "iostream"
+#include "Asteroid.h"
 
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
@@ -54,9 +58,10 @@ std::vector<std::vector<Vector2>> asteroidShapes =
     }
 };
 
-Asteroid::Asteroid() : CollidableObject(
+Asteroid::Asteroid(const float& size, const Vector2& position) : CollidableObject(
     new sf::ConvexShape(),
-    Random::randomf(10.f, 40.f),
+    CollisionTag::AsteroidTag,
+    size,
     Vector2(Random::randomf(-1.f, 1.f), Random::randomf(-1.f, 1.f)),
     Random::randomf(20.f, 100.f)
 ),
@@ -70,23 +75,20 @@ m_rotationSpeed(Random::randomf(10.f, 60.f))
     const int shapeForm = Random::random(0, asteroidShapes.size());
     shape->setPointCount(asteroidShapes[shapeForm].size());
     for (int i = 0; i < asteroidShapes[shapeForm].size(); ++i)
-		shape->setPoint(i, asteroidShapes[shapeForm][i]);
+        shape->setPoint(i, asteroidShapes[shapeForm][i]);
 
     // Set different values of the shape
     m_shape->setFillColor(sf::Color::Transparent);
     m_shape->setOutlineThickness(0.05f);
-    setPosition(
-        Vector2(
-	        Random::randomf(0.f, SCREEN_WIDTH),
-	        Random::randomf(0.f, SCREEN_HEIGHT)
-        )
-    );
+    setPosition(position);
 
     m_velocity = Vector2(
         Random::randomf(-1.f, 1.f),
         Random::randomf(-1.f, 1.f)
     );
 }
+Asteroid::Asteroid(const float& size) : Asteroid(size, Vector2(Random::randomf(0.f, SCREEN_WIDTH), Random::randomf(0.f, SCREEN_HEIGHT))) {}
+Asteroid::Asteroid() : Asteroid(Random::randomf(10.f, 40.f)) {}
 Asteroid::~Asteroid()
 {
     delete m_shape;
@@ -107,5 +109,10 @@ void Asteroid::draw(sf::RenderWindow& window)
 }
 void Asteroid::destroy()
 {
-    delete this;
+	if (m_size >= m_minBreakSize)
+	{
+        new Asteroid(m_size / 2.f, Vector2::from(m_shape->getPosition()));
+        new Asteroid(m_size / 2.f, Vector2::from(m_shape->getPosition()));
+	}
+    GameHandler::destroyObject(this);
 }

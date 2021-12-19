@@ -1,6 +1,12 @@
 #pragma once
-#include "Vector2.h"
 #include "Transform.h"
+
+namespace sf
+{
+	class Shape;
+	class RenderWindow;
+}
+struct Vector2;
 
 class GameObject : public Transform
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector2.h"
+struct Vector2;
 
 class Math
 {

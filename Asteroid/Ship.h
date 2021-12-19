@@ -1,4 +1,7 @@
 #pragma once
+namespace sf { class RenderWindow; }
+struct Vector2;
+
 #include "CollidableObject.h"
 
 class Ship : public CollidableObject
@@ -20,7 +23,7 @@ private:
 	// Rotation values
 	float m_rotationDragFactor = .999f;
 	float m_rotationSpeed = 0.f;
-	float m_rotationAcceleration = 333.f;
+	float m_rotationAcceleration = 420.f;
 	float m_maxRotationSpeed = 150.f;
 	// Movement values
 	float m_movementDragFactor = .9998f;

@@ -1,6 +1,8 @@
+#include "CollisionTag.h"
 #include "InputSystem.h"
 #include "Time.h"
 #include "Math.h"
+#include "GameHandler.h"
 #include "Bullet.h"
 #include "Ship.h"
 
@@ -9,20 +11,24 @@ extern int SCREEN_HEIGHT;
 
 Ship::Ship() : CollidableObject(
 	new sf::ConvexShape(),
+	CollisionTag::ShipTag,
 	15.f,
+	10.f,
 	Vector2::zero(),
 	0.f
 )
 {
 	// Set points of Ship
 	auto shape = dynamic_cast<sf::ConvexShape*>(m_shape);
-	shape->setPointCount(6);
+	shape->setPointCount(8);
 	shape->setPoint(0, Vector2(0.f, -1.f));
-	shape->setPoint(1, Vector2(1.f, 0.7f));
-	shape->setPoint(2, Vector2(0.5f, 0.6f));
-	shape->setPoint(3, Vector2(0.f, 1.f));
-	shape->setPoint(4, Vector2(-0.5f, 0.6f));
-	shape->setPoint(5, Vector2(-1.f, 0.7f));
+	shape->setPoint(1, Vector2(0.75f, -0.2f));
+	shape->setPoint(2, Vector2(1.f, 0.75f));
+	shape->setPoint(3, Vector2(0.5f, 0.5f));
+	shape->setPoint(4, Vector2(0.f, 1.f));
+	shape->setPoint(5, Vector2(-0.5f, 0.5f));
+	shape->setPoint(6, Vector2(-1.f, 0.75f));
+	shape->setPoint(7, Vector2(-0.75f, -0.2f));
 
 	// Set different values of the shape
 	setPosition(Vector2(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f));
@@ -43,7 +49,10 @@ void Ship::draw(sf::RenderWindow& window)
 	window.draw(*m_shape);
 	CollidableObject::draw(window);
 }
-void Ship::destroy() {}
+void Ship::destroy()
+{
+	GameHandler::destroyObject(this);
+}
 
 
 void Ship::handleRotation()
@@ -76,9 +85,6 @@ void Ship::handleMovement()
 }
 void Ship::handleShoot()
 {
-	const Vector2 position = Vector2(m_shape->getPosition().x, m_shape->getPosition().y);
-	if (InputSystem::getKey(sf::Keyboard::Space)) 
-	{
-		new Bullet(position, Math::angleToVector(m_shape->getRotation()));
-	}
+	if (InputSystem::getKeyDown(sf::Keyboard::Space)) 
+		new Bullet(Vector2::from(m_shape->getPosition()), Math::angleToVector(m_shape->getRotation()));
 }

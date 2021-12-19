@@ -1,3 +1,8 @@
+#include <SFML/Graphics.hpp>
+
+#include "Event.h"
+#include "GameObject.h"
+#include "CollidableObject.h"
 #include "GameHandler.h"
 
 // Events
@@ -11,10 +16,12 @@ Event<sf::RenderWindow&> GameHandler::onDraw = Event<sf::RenderWindow&>();
 GameHandler::GameHandler() = default;
 GameHandler::~GameHandler() = default;
 
+void GameHandler::start()
+{
+	onStart();
+}
 void GameHandler::update(sf::RenderWindow& window)
 {
-	std::cout << "Obect size: " << m_objectsToDelete.size() << std::endl;
-
 	onEarlyUpdate();
 	onUpdate();
 	onLateUpdate();
@@ -36,6 +43,18 @@ void GameHandler::destroyObject(GameObject* object)
 {
 	m_objectsToDelete.push_back(object);
 }
+std::vector<CollidableObject*> GameHandler::getObjectsOfTag(const CollisionTag& tag)
+{
+	std::vector<CollidableObject*> objects = {};
+	for (auto it = m_objects.begin(); it != m_objects.end(); ++it)
+	{
+		GameObject* object = *it;
+		auto* collidableObject = dynamic_cast<CollidableObject*>(object);
+		if (collidableObject)
+			if (collidableObject->getTag() == tag) objects.push_back(collidableObject);
+	}
+	return objects;
+}
 
 void GameHandler::deleteObjects()
 {
@@ -44,8 +63,6 @@ void GameHandler::deleteObjects()
 		GameObject* object = *it;
 		if (object)
 		{
-			object->destroy();
-
 			auto objectIt = std::find(m_objects.begin(), m_objects.end(), object);
 			m_objects.erase(objectIt);
 

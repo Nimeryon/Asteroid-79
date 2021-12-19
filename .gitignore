@@ -419,3 +419,7 @@ FodyWeavers.xsd
 *.exe
 *.out
 *.app
+Event/Event.h
+Event/Event.vcxproj
+Event/Event.vcxproj.filters
+Event/Main.cpp

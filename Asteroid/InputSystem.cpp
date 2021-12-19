@@ -1,7 +1,7 @@
-#include <iostream>
-
-#include "InputSystem.h"
+#include "Event.h"
+#include "Vector2.h"
 #include "GameHandler.h"
+#include "InputSystem.h"
 
 // KeyBoard
 std::map<sf::Keyboard::Key, bool> InputSystem::m_keyboardState = getKeyBoardState();

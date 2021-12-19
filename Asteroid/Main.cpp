@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "ResourceManager.h"
 #include "GameHandler.h"
 #include "InputSystem.h"
 #include "TickSystem.h"
@@ -56,8 +57,9 @@ int main()
 {
     // Set seed of random
     std::srand(std::time(nullptr));
-
+    
     // Initialize systems
+    if (!ResourceManager::load()) return 1;
     Time time;
     GameHandler gameHandler;
     InputSystem inputSystem;
@@ -68,8 +70,11 @@ int main()
     for (int i = 0; i < 20; ++i)
         new Asteroid();
 
+    // Text test
+    sf::Text text;
+
     // Call start event
-    GameHandler::onStart();
+    gameHandler.start();
 
     // Start loop
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Asteroid");
@@ -86,7 +91,7 @@ int main()
         window.clear();
 
         // Update Systems
-        time.setTime(clock.restart());
+        time.setTime(clock.restart().asSeconds());
         gameHandler.update(window);
 
         // Set debug mode

@@ -1,5 +1,6 @@
 #pragma once
-#include "Event.h"
+template<typename T>
+class Event;
 
 class TickSystem
 {

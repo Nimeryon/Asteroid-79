@@ -3,7 +3,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include <map>
 
-#include "Vector2.h"
+struct Vector2;
 
 class InputSystem
 {

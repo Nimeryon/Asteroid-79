@@ -1,13 +1,9 @@
 #pragma once
-#include <SFML/System/Clock.hpp>
+namespace sf { class Time; }
 
 class Time
 {
 public:
 	static float deltaTime;
-
-	void setTime(sf::Time time);
-
-private:
-	sf::Time m_clockTime;
+	void setTime(const float& time);
 };

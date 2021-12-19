@@ -73,6 +73,7 @@ struct Vector2
 	}
 
 	// Operator when used with SFML
+	static Vector2 from(sf::Vector2f vector) { return Vector2(vector.x, vector.y); }
 	operator sf::Vector2f() const { return { X, Y }; }
 	operator sf::Vector2i() const { return { (int)X, (int)Y }; }
 

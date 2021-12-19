@@ -1,9 +1,14 @@
 #pragma once
+namespace sf { class RenderWindow; }
+struct Vector2;
+
 #include "CollidableObject.h"
 
 class Asteroid : public CollidableObject
 {
 public:
+    Asteroid(const float& size, const Vector2& position);
+    Asteroid(const float& size);
     Asteroid();
     ~Asteroid() override;
 
@@ -14,4 +19,5 @@ public:
 
 private:
     float m_rotationSpeed;
+    float m_minBreakSize = 15.f;
 };

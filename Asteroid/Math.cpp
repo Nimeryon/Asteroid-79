@@ -1,5 +1,6 @@
 #include <algorithm>
 
+#include "Vector2.h"
 #include "Math.h"
 
 constexpr float PI = 3.14159265359f;
