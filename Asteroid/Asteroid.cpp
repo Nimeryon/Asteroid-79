@@ -89,10 +89,7 @@ m_rotationSpeed(Random::randomf(10.f, 60.f))
 }
 Asteroid::Asteroid(const float& size) : Asteroid(size, Vector2(Random::randomf(0.f, SCREEN_WIDTH), Random::randomf(0.f, SCREEN_HEIGHT))) {}
 Asteroid::Asteroid() : Asteroid(Random::randomf(10.f, 40.f)) {}
-Asteroid::~Asteroid()
-{
-    delete m_shape;
-};
+Asteroid::~Asteroid() = default;
 
 void Asteroid::start() {}
 void Asteroid::update()

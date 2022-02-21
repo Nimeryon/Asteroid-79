@@ -9,4 +9,4 @@ bool ResourceManager::load()
 	return m_font.loadFromFile("./Fonts/Minecraft.ttf");
 }
 
-sf::Font* ResourceManager::getFont() { return &m_font; }
+sf::Font ResourceManager::getFont() { return m_font; }

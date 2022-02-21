@@ -5,7 +5,7 @@ public:
 	static bool load();
 
 	// Getters
-	static sf::Font* getFont();
+	static sf::Font getFont();
 
 private:
 	static sf::Font m_font;

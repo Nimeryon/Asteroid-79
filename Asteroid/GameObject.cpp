@@ -27,7 +27,7 @@ GameObject::~GameObject()
 	GameHandler::onUpdate -= EventHandler::bind(&GameObject::update, this);
 	GameHandler::onDraw -= EventHandler::bind<sf::RenderWindow&, GameObject>(&GameObject::draw, this);
 
-	// delete m_shape;
+	delete m_shape;
 }
 
 // Setters

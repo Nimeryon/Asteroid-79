@@ -70,8 +70,14 @@ int main()
     for (int i = 0; i < 20; ++i)
         new Asteroid();
 
-    // Text test
+    sf::Font font;
+	font.loadFromFile("./Fonts/Minecraft.ttf");
+
     sf::Text text;
+    //text.setFont(ResourceManager::getFont());
+    text.setFont(font);
+    text.setString("Hello world");
+    text.setCharacterSize(24);
 
     // Call start event
     gameHandler.start();
@@ -96,6 +102,8 @@ int main()
 
         // Set debug mode
         if (InputSystem::getKeyDown(sf::Keyboard::F3)) DEBUG_MODE = !DEBUG_MODE;
+
+        window.draw(text);
 
         window.display();
     }
